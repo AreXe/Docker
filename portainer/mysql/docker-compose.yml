@@ -5,8 +5,6 @@ services:
   phpmyadmin:
     container_name: phpmyadmin
     image: phpmyadmin:latest
-    environment:
-      PMA_ARBITRARY: 1
     restart: always
     ports:
       - 3308:80
