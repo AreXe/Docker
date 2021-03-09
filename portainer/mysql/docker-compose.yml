@@ -1,15 +1,25 @@
-version: '3.3'
+version: '3.7'
+
+services:
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin:latest
+    environment:
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 3308:80
+  db:
+    container_name: mysql
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    volumes:
+      - db-vol:/var/lib/mysql
 
 volumes:
-    portainer-data:
-    
-services:
-    portainer:
-        image: portainer/portainer-ce:latest
-        ports:
-            - "11000:9000"
-        command: -H unix:///var/run/docker.sock
-        volumes:
-            - /var/run/docker.sock:/var/run/docker.sock
-            - portainer-data:/data
-        restart: always
+  db-vol:
